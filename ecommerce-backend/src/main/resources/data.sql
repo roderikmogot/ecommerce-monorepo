@@ -1,7 +1,7 @@
 INSERT INTO users (email, password_hash, full_name)
 SELECT 'roderikmogot@example.com',
        'roderikmogot',
-       'Roderik Mogot' WHERE NOT EXISTS (SELECT 1 FROM users WHERE email = 'customer1@example.com');
+       'Roderik Mogot' WHERE NOT EXISTS (SELECT 1 FROM users WHERE email = 'roderikmogot@example.com');
 
 INSERT INTO products (name, description, price, stock_quantity)
 SELECT 'Laptop Pro',
