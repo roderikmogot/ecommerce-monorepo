@@ -22,14 +22,38 @@ repositories {
 extra["snippetsDir"] = file("build/generated-snippets")
 
 dependencies {
+    // --- Core Dependencies ---
+    // Spring WebFlux
+    implementation("org.springframework.boot:spring-boot-starter-webflux")
+    // Spring Data R2DBC
+    implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
+    // Spring Boot's SQL Initializer
+    implementation("org.springframework.boot:spring-boot-starter-jdbc")
+    // Actuator for monitoring
     implementation("org.springframework.boot:spring-boot-starter-actuator")
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-    developmentOnly("org.springframework.boot:spring-boot-docker-compose")
+    // Jackson module for Kotlin
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+    // Kotlin Coroutines support
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+    // R2DBC PostgreSQL driver
+    runtimeOnly("org.postgresql:r2dbc-postgresql")
+    runtimeOnly("io.r2dbc:r2dbc-pool")
+
+    // Prometheus for metrics
     runtimeOnly("io.micrometer:micrometer-registry-prometheus")
+
+    // --- Testing Dependencies ---
+    // Core testing
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
-    testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    // Test with coroutines
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test")
+    // Mockito for mocking in tests
+    testImplementation("org.mockito.kotlin:mockito-kotlin:5.2.1")
+    // Testcontainers for integration testing with a real DB
+    testImplementation("org.testcontainers:junit-jupiter")
+    testImplementation("org.testcontainers:postgresql")
+    testImplementation("org.testcontainers:r2dbc")
 }
 
 kotlin {
