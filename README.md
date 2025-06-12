@@ -1,13 +1,13 @@
 # Ecommerce
 
-Team 1: E-Commerce System (Check-out, add to cart, payment, etc)
+**Team 1: E-Commerce System (Check-out, add to cart, payment, etc)**
 
-Muhammad Fathan Muthahhari
-Roderik Yohanes Mogot
-Steven Brian Susantio
-Muhammad Iqbal
+- Muhammad Fathan Muthahhari
+- Roderik Yohanes Mogot
+- Steven Brian Susantio
+- Muhammad Iqbal
 
-Mini Project Requirement
+### Mini Project Requirement
 
 **Mandatory**
 
