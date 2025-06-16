@@ -1,8 +1,7 @@
-package com.example.ecommercebackend.controllers
+package com.example.ecommercebackend.controller
 
 import com.example.ecommercebackend.dto.ProductDto
-import com.example.ecommercebackend.dto.toDto
-import com.example.ecommercebackend.repositories.ProductRepository
+import com.example.ecommercebackend.repository.ProductRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import org.springframework.http.ResponseEntity

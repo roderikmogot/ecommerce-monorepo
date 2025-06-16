@@ -1,11 +1,11 @@
-package com.example.ecommercebackend.services
+package com.example.ecommercebackend.service
 
 import com.example.ecommercebackend.dto.CreateOrderRequest
-import com.example.ecommercebackend.models.Order
-import com.example.ecommercebackend.models.OrderItem
-import com.example.ecommercebackend.repositories.OrderItemRepository
-import com.example.ecommercebackend.repositories.OrderRepository
-import com.example.ecommercebackend.repositories.ProductRepository
+import com.example.ecommercebackend.model.Order
+import com.example.ecommercebackend.model.OrderItem
+import com.example.ecommercebackend.repository.OrderItemRepository
+import com.example.ecommercebackend.repository.OrderRepository
+import com.example.ecommercebackend.repository.ProductRepository
 import kotlinx.coroutines.flow.toList
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
