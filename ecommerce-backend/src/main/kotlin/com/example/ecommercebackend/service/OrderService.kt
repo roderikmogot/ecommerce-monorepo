@@ -1,6 +1,7 @@
 package com.example.ecommercebackend.service
 
 import com.example.ecommercebackend.dto.CreateOrderRequest
+import com.example.ecommercebackend.exception.*
 import com.example.ecommercebackend.model.Order
 import com.example.ecommercebackend.model.OrderItem
 import com.example.ecommercebackend.repository.OrderItemRepository
@@ -11,8 +12,6 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.math.BigDecimal
 
-class InsufficientStockException(message: String) : RuntimeException(message)
-class ProductNotFoundException(message: String) : RuntimeException(message)
 
 @Service
 class OrderService(
@@ -36,7 +35,7 @@ class OrderService(
         var totalAmount = BigDecimal.ZERO
 
         for (item in request.items) {
-            val product = products[item.productId]!!
+            val product = products[item.productId] ?: throw ProductNotFoundException("Products not found: ${item.productId}")
             if (product.stockQuantity < item.quantity) {
                 throw InsufficientStockException("Not enough stock for product ${product.name}")
             }
@@ -52,7 +51,7 @@ class OrderService(
         )
 
         for (item in request.items) {
-            val product = products[item.productId]!!
+            val product = products[item.productId] ?: throw ProductNotFoundException("Products not found: ${item.productId}")
 
             orderItemRepository.save(
                 OrderItem(

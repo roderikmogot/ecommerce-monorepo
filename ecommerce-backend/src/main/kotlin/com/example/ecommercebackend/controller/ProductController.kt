@@ -1,7 +1,7 @@
 package com.example.ecommercebackend.controller
 
 import com.example.ecommercebackend.dto.ProductDto
-import com.example.ecommercebackend.repository.ProductRepository
+import com.example.ecommercebackend.service.ProductService
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import org.springframework.http.ResponseEntity
@@ -9,18 +9,20 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/products")
-class Product(private val productRepository: ProductRepository) {
+class ProductController(private val productService: ProductService) {
 
     @GetMapping
     fun getAllProducts(): Flow<ProductDto> {
-        return productRepository.findAll().map { it.toDto() }
+        return productService.findAll().map { it.toDto() }
     }
 
     @GetMapping("/{id}")
     suspend fun getProductById(@PathVariable id: Long): ResponseEntity<ProductDto> {
-        val product = productRepository.findById(id)
+        val product = productService.findById(id)
         return product?.let {
             ResponseEntity.ok(it.toDto())
         } ?: ResponseEntity.notFound().build()
     }
+
+    // TODO tambahin add product
 }

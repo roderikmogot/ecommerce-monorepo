@@ -1,8 +1,6 @@
 package com.example.ecommercebackend.exception
 
 import com.example.ecommercebackend.dto.ErrorResponse
-import com.example.ecommercebackend.service.InsufficientStockException
-import com.example.ecommercebackend.service.ProductNotFoundException
 import org.springframework.dao.OptimisticLockingFailureException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
