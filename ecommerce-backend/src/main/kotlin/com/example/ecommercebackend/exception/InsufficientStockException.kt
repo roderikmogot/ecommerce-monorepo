@@ -1,3 +1,5 @@
 package com.example.ecommercebackend.exception
 
-class InsufficientStockException(message: String) : RuntimeException(message)
+import org.springframework.http.HttpStatus
+
+class InsufficientStockException(message: String) : AppException(HttpStatus.BAD_REQUEST, message)

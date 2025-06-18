@@ -1,6 +1,6 @@
 -- Users table to store customer information
 CREATE TABLE IF NOT EXISTS users (
-    id BIGSERIAL PRIMARY KEY,
+    id VARCHAR(36) PRIMARY KEY DEFAULT gen_random_uuid(),
     email VARCHAR(255) NOT NULL UNIQUE,
     password_hash VARCHAR(255) NOT NULL,
     full_name VARCHAR(255),
@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS users (
 
 -- Products table with stock and version for optimistic locking
 CREATE TABLE IF NOT EXISTS products (
-    id BIGSERIAL PRIMARY KEY,
+    id VARCHAR(36) PRIMARY KEY DEFAULT gen_random_uuid(),
     name VARCHAR(255) NOT NULL,
     description TEXT,
     price NUMERIC(10, 2) NOT NULL,
@@ -21,8 +21,8 @@ CREATE TABLE IF NOT EXISTS products (
 
 -- Orders table to store customer orders
 CREATE TABLE IF NOT EXISTS orders (
-    id BIGSERIAL PRIMARY KEY,
-    user_id BIGINT NOT NULL,
+    id VARCHAR(36) PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id VARCHAR(36) NOT NULL,
     status VARCHAR(50) NOT NULL, -- e.g., PENDING, COMPLETED, FAILED
     total_amount NUMERIC(10, 2) NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
@@ -32,9 +32,9 @@ CREATE TABLE IF NOT EXISTS orders (
 
 -- Order items junction table
 CREATE TABLE IF NOT EXISTS order_items (
-    id BIGSERIAL PRIMARY KEY,
-    order_id BIGINT NOT NULL,
-    product_id BIGINT NOT NULL,
+    id VARCHAR(36) PRIMARY KEY DEFAULT gen_random_uuid(),
+    order_id VARCHAR(36) NOT NULL,
+    product_id VARCHAR(36) NOT NULL,
     quantity INT NOT NULL,
     price_per_item NUMERIC(10, 2) NOT NULL,
     CONSTRAINT fk_order_items_order FOREIGN KEY (order_id)

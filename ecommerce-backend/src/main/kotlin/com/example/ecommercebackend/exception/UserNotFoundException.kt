@@ -1,3 +1,5 @@
 package com.example.ecommercebackend.exception
 
-class UserNotFoundException(message: String) : RuntimeException(message)
+import org.springframework.http.HttpStatus
+
+class UserNotFoundException(id: String) : AppException(HttpStatus.NOT_FOUND, "User not found: $id")
