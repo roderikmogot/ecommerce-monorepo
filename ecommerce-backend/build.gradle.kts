@@ -37,6 +37,9 @@ dependencies {
     // Kotlin Coroutines support
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+    implementation("io.github.oshai:kotlin-logging-jvm:6.0.3")
+    implementation("org.springframework.security:spring-security-crypto")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
     // R2DBC PostgreSQL driver
     runtimeOnly("org.postgresql:r2dbc-postgresql")
     runtimeOnly("io.r2dbc:r2dbc-pool")
@@ -55,6 +58,8 @@ dependencies {
     testImplementation("org.testcontainers:junit-jupiter")
     testImplementation("org.testcontainers:postgresql")
     testImplementation("org.testcontainers:r2dbc")
+    testImplementation("io.projectreactor:reactor-test")
+    testImplementation("io.mockk:mockk:1.13.5")
 }
 
 kotlin {

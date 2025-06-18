@@ -1,18 +1,18 @@
-package com.example.ecommercebackend.services
+package com.example.ecommercebackend.service
 
 import com.example.ecommercebackend.dto.CreateOrderRequest
-import com.example.ecommercebackend.models.Order
-import com.example.ecommercebackend.models.OrderItem
-import com.example.ecommercebackend.repositories.OrderItemRepository
-import com.example.ecommercebackend.repositories.OrderRepository
-import com.example.ecommercebackend.repositories.ProductRepository
+import com.example.ecommercebackend.exception.general.InsufficientStockException
+import com.example.ecommercebackend.exception.general.ProductNotFoundException
+import com.example.ecommercebackend.model.Order
+import com.example.ecommercebackend.model.OrderItem
+import com.example.ecommercebackend.repository.OrderItemRepository
+import com.example.ecommercebackend.repository.OrderRepository
+import com.example.ecommercebackend.repository.ProductRepository
 import kotlinx.coroutines.flow.toList
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.math.BigDecimal
 
-class InsufficientStockException(message: String) : RuntimeException(message)
-class ProductNotFoundException(message: String) : RuntimeException(message)
 
 @Service
 class OrderService(
@@ -36,7 +36,7 @@ class OrderService(
         var totalAmount = BigDecimal.ZERO
 
         for (item in request.items) {
-            val product = products[item.productId]!!
+            val product = products[item.productId] ?: throw ProductNotFoundException("Products not found: ${item.productId}")
             if (product.stockQuantity < item.quantity) {
                 throw InsufficientStockException("Not enough stock for product ${product.name}")
             }
@@ -52,7 +52,7 @@ class OrderService(
         )
 
         for (item in request.items) {
-            val product = products[item.productId]!!
+            val product = products[item.productId] ?: throw ProductNotFoundException("Products not found: ${item.productId}")
 
             orderItemRepository.save(
                 OrderItem(
@@ -70,7 +70,7 @@ class OrderService(
         return order.copy(status = "COMPLETED")
     }
 
-    suspend fun getOrderDetails(orderId: Long): Pair<Order, List<OrderItem>>? {
+    suspend fun getOrderDetails(orderId: String): Pair<Order, List<OrderItem>>? {
         val order = orderRepository.findById(orderId) ?: return null
         val items = orderItemRepository.findByOrderId(order.id!!).toList()
         return order to items
