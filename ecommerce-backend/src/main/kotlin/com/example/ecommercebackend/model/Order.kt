@@ -8,8 +8,8 @@ import java.time.Instant
 
 @Table("orders")
 data class Order(
-    @Id val id: Long? = null,
-    val userId: Long,
+    @Id val id: String? = null,
+    val userId: String,
     val status: String,
     val totalAmount: BigDecimal,
     val createdAt: Instant? = Instant.now()

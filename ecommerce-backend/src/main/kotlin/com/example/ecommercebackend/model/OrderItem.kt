@@ -7,9 +7,9 @@ import java.math.BigDecimal
 
 @Table("order_items")
 data class OrderItem(
-    @Id val id: Long? = null,
-    val orderId: Long,
-    val productId: Long,
+    @Id val id: String? = null,
+    val orderId: String,
+    val productId: String,
     val quantity: Int,
     val pricePerItem: BigDecimal
 ) {

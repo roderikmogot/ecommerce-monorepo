@@ -1,8 +1,8 @@
 package com.example.ecommercebackend.exception
 
 import com.example.ecommercebackend.dto.ErrorResponse
+import com.example.ecommercebackend.exception.general.*
 import io.github.oshai.kotlinlogging.KLogger
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.dao.OptimisticLockingFailureException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity

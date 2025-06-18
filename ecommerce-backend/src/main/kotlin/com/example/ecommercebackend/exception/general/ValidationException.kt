@@ -1,4 +1,4 @@
-package com.example.ecommercebackend.exception
+package com.example.ecommercebackend.exception.general
 
 import org.springframework.http.HttpStatus
 

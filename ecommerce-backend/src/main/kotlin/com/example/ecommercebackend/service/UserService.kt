@@ -3,9 +3,9 @@ package com.example.ecommercebackend.service
 import com.example.ecommercebackend.dto.UserRegistrationDto
 import com.example.ecommercebackend.dto.UserResponseDto
 import com.example.ecommercebackend.dto.UserUpdateDto
-import com.example.ecommercebackend.exception.EmailAlreadyExistsException
-import com.example.ecommercebackend.exception.InvalidDataException
-import com.example.ecommercebackend.exception.UserNotFoundException
+import com.example.ecommercebackend.exception.general.EmailAlreadyExistsException
+import com.example.ecommercebackend.exception.general.InvalidDataException
+import com.example.ecommercebackend.exception.general.UserNotFoundException
 import com.example.ecommercebackend.model.User
 import com.example.ecommercebackend.repository.UserRepository
 import io.github.oshai.kotlinlogging.KLogger
@@ -49,7 +49,7 @@ class UserService(
             throw EmailAlreadyExistsException(updateDto.email)
         } else if (updateDto.email?.isBlank() == true || updateDto.fullName?.isBlank() == true) {
             logger.warn { "User ${existingUser.id} attempted to use blank field." }
-            throw InvalidDataException(id)
+            throw InvalidDataException("User ${existingUser.id} attempted to use blank field")
         }
 
         val updatedUser = existingUser.copy(

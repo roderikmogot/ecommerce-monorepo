@@ -2,9 +2,9 @@ package com.example.ecommercebackend.controller
 
 import com.example.ecommercebackend.dto.UserRegistrationDto
 import com.example.ecommercebackend.dto.UserResponseDto
-import com.example.ecommercebackend.exception.EmailAlreadyExistsException
+import com.example.ecommercebackend.exception.general.EmailAlreadyExistsException
 import com.example.ecommercebackend.exception.GlobalExceptionHandler
-import com.example.ecommercebackend.exception.UserNotFoundException
+import com.example.ecommercebackend.exception.general.UserNotFoundException
 import com.example.ecommercebackend.model.User
 import com.example.ecommercebackend.service.UserService
 import io.github.oshai.kotlinlogging.KLogger
@@ -20,13 +20,11 @@ import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
-import org.springframework.context.annotation.Import
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.test.web.reactive.server.WebTestClient
 import org.springframework.web.reactive.function.BodyInserters
 import java.time.Instant
-import java.util.concurrent.Flow
 
 @ExperimentalCoroutinesApi
 @ExtendWith(MockKExtension::class)

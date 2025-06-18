@@ -1,7 +1,8 @@
 package com.example.ecommercebackend.service
 
 import com.example.ecommercebackend.dto.CreateOrderRequest
-import com.example.ecommercebackend.exception.*
+import com.example.ecommercebackend.exception.general.InsufficientStockException
+import com.example.ecommercebackend.exception.general.ProductNotFoundException
 import com.example.ecommercebackend.model.Order
 import com.example.ecommercebackend.model.OrderItem
 import com.example.ecommercebackend.repository.OrderItemRepository
@@ -69,7 +70,7 @@ class OrderService(
         return order.copy(status = "COMPLETED")
     }
 
-    suspend fun getOrderDetails(orderId: Long): Pair<Order, List<OrderItem>>? {
+    suspend fun getOrderDetails(orderId: String): Pair<Order, List<OrderItem>>? {
         val order = orderRepository.findById(orderId) ?: return null
         val items = orderItemRepository.findByOrderId(order.id!!).toList()
         return order to items

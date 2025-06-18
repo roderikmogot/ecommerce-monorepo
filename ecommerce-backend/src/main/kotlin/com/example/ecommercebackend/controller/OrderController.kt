@@ -20,7 +20,7 @@ class OrderController(private val orderService: OrderService) {
     }
 
     @GetMapping("/{id}")
-    suspend fun getOrderById(@PathVariable id: Long): ResponseEntity<OrderResponseDto> {
+    suspend fun getOrderById(@PathVariable id: String): ResponseEntity<OrderResponseDto> {
         val orderDetails = orderService.getOrderDetails(id)
             ?: throw NoSuchElementException("Order with ID $id not found")
 

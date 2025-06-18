@@ -1,6 +1,6 @@
 package com.example.ecommercebackend.dto
 
 data class CartItemDto(
-    val productId: Long,
+    val productId: String,
     val quantity: Int
 )

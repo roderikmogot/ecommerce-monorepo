@@ -20,7 +20,7 @@ class UserController(
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
     suspend fun register(@Valid @RequestBody registrationDto: UserRegistrationDto): UserResponseDto {
-        logger.info { "Processing registration request for: ${registrationDto.email}" }
+        logger.info { "User registration for: ${registrationDto.email}" }
         return userService.register(registrationDto)
     }
 
