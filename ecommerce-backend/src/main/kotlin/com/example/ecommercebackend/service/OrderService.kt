@@ -63,8 +63,7 @@ class OrderService(
                 )
             )
 
-            val updatedProduct = product.copy(stockQuantity = product.stockQuantity - item.quantity)
-            productRepository.save(updatedProduct)
+            productRepository.updateStockQuantity(product.id!!, product.stockQuantity - item.quantity)
         }
 
         return order.copy(status = "COMPLETED")

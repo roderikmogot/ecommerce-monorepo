@@ -1,9 +1,21 @@
 package com.example.ecommercebackend.dto.order
 
-import java.math.BigDecimal
+import com.example.ecommercebackend.model.Order
+import com.example.ecommercebackend.model.OrderItem
 
-data class OrderItemResponseDto(
-    val productId: String,
-    val quantity: Int,
-    val pricePerItem: BigDecimal
-)
+fun Order.toResponseDto(items: List<OrderItem>): OrderResponseDto {
+    return OrderResponseDto(
+        id = this.id!!,
+        userId = this.userId,
+        status = this.status,
+        totalAmount = this.totalAmount,
+        createdAt = this.createdAt,
+        items = items.map {
+            OrderItemResponseDto(
+                productId = it.productId,
+                quantity = it.quantity,
+                pricePerItem = it.pricePerItem
+            )
+        }
+    )
+}
