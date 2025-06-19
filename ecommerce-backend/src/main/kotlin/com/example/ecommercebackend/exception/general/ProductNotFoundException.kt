@@ -1,3 +1,5 @@
 package com.example.ecommercebackend.exception.general
 
-class ProductNotFoundException(message: String) : RuntimeException(message)
+import org.springframework.http.HttpStatus
+
+class ProductNotFoundException(id: String) : AppException(HttpStatus.NOT_FOUND, "Product not found: $id")

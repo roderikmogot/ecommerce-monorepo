@@ -1,6 +1,6 @@
 package com.example.ecommercebackend.model
 
-import com.example.ecommercebackend.dto.OrderItemResponseDto
+import com.example.ecommercebackend.dto.order.OrderItemResponseDto
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Table
 import java.math.BigDecimal

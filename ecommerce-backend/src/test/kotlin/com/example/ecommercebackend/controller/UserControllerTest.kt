@@ -1,7 +1,7 @@
 package com.example.ecommercebackend.controller
 
-import com.example.ecommercebackend.dto.UserRegistrationDto
-import com.example.ecommercebackend.dto.UserResponseDto
+import com.example.ecommercebackend.dto.user.UserRegistrationDto
+import com.example.ecommercebackend.dto.user.UserResponseDto
 import com.example.ecommercebackend.exception.general.EmailAlreadyExistsException
 import com.example.ecommercebackend.exception.GlobalExceptionHandler
 import com.example.ecommercebackend.exception.general.UserNotFoundException

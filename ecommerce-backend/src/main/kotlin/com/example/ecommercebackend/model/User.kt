@@ -1,6 +1,6 @@
 package com.example.ecommercebackend.model
 
-import com.example.ecommercebackend.dto.UserResponseDto
+import com.example.ecommercebackend.dto.user.UserResponseDto
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Table
 import java.time.Instant

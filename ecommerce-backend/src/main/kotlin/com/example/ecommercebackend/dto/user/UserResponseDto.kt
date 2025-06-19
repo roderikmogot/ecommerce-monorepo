@@ -1,4 +1,4 @@
-package com.example.ecommercebackend.dto
+package com.example.ecommercebackend.dto.user
 
 import java.time.Instant
 

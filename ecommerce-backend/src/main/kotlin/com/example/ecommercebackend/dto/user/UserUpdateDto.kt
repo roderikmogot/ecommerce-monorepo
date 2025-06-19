@@ -1,4 +1,4 @@
-package com.example.ecommercebackend.dto
+package com.example.ecommercebackend.dto.user
 
 import jakarta.validation.constraints.Email
 
