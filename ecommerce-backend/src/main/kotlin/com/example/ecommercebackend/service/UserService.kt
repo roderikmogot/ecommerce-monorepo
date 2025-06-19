@@ -1,8 +1,8 @@
 package com.example.ecommercebackend.service
 
-import com.example.ecommercebackend.dto.UserRegistrationDto
-import com.example.ecommercebackend.dto.UserResponseDto
-import com.example.ecommercebackend.dto.UserUpdateDto
+import com.example.ecommercebackend.dto.user.UserRegistrationDto
+import com.example.ecommercebackend.dto.user.UserResponseDto
+import com.example.ecommercebackend.dto.user.UserUpdateDto
 import com.example.ecommercebackend.exception.general.EmailAlreadyExistsException
 import com.example.ecommercebackend.exception.general.InvalidDataException
 import com.example.ecommercebackend.exception.general.UserNotFoundException
@@ -48,7 +48,7 @@ class UserService(
             logger.warn { "User ${existingUser.id} attempted to update to an existing email: ${updateDto.email}" }
             throw EmailAlreadyExistsException(updateDto.email)
         } else if (updateDto.email?.isBlank() == true || updateDto.fullName?.isBlank() == true) {
-            logger.warn { "User ${existingUser.id} attempted to use blank field." }
+            logger.warn { "User ${existingUser.id} attempted to use blank field" }
             throw InvalidDataException("User ${existingUser.id} attempted to use blank field")
         }
 

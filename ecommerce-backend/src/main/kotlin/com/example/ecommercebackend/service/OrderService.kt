@@ -1,6 +1,6 @@
 package com.example.ecommercebackend.service
 
-import com.example.ecommercebackend.dto.CreateOrderRequest
+import com.example.ecommercebackend.dto.order.CreateOrderRequest
 import com.example.ecommercebackend.exception.general.InsufficientStockException
 import com.example.ecommercebackend.exception.general.ProductNotFoundException
 import com.example.ecommercebackend.model.Order
@@ -30,13 +30,13 @@ class OrderService(
         if (products.size != productIds.size) {
             val foundIds = products.keys
             val notFoundIds = productIds.filterNot { it in foundIds }
-            throw ProductNotFoundException("Products not found: $notFoundIds")
+            throw ProductNotFoundException(notFoundIds.first())
         }
 
         var totalAmount = BigDecimal.ZERO
 
         for (item in request.items) {
-            val product = products[item.productId] ?: throw ProductNotFoundException("Products not found: ${item.productId}")
+            val product = products[item.productId] ?: throw ProductNotFoundException(item.productId)
             if (product.stockQuantity < item.quantity) {
                 throw InsufficientStockException("Not enough stock for product ${product.name}")
             }
@@ -52,7 +52,7 @@ class OrderService(
         )
 
         for (item in request.items) {
-            val product = products[item.productId] ?: throw ProductNotFoundException("Products not found: ${item.productId}")
+            val product = products[item.productId] ?: throw ProductNotFoundException(item.productId)
 
             orderItemRepository.save(
                 OrderItem(

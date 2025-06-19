@@ -1,8 +1,8 @@
 package com.example.ecommercebackend.controller
 
-import com.example.ecommercebackend.dto.UserRegistrationDto
-import com.example.ecommercebackend.dto.UserResponseDto
-import com.example.ecommercebackend.dto.UserUpdateDto
+import com.example.ecommercebackend.dto.user.UserRegistrationDto
+import com.example.ecommercebackend.dto.user.UserResponseDto
+import com.example.ecommercebackend.dto.user.UserUpdateDto
 import com.example.ecommercebackend.service.UserService
 import io.github.oshai.kotlinlogging.KLogger
 import jakarta.validation.Valid

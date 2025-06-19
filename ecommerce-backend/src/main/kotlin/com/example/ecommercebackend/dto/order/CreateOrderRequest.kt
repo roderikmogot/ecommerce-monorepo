@@ -1,4 +1,4 @@
-package com.example.ecommercebackend.dto
+package com.example.ecommercebackend.dto.order
 
 data class CreateOrderRequest(
     val userId: String,

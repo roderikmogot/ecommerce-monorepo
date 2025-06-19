@@ -1,6 +1,6 @@
 package com.example.ecommercebackend.model
 
-import com.example.ecommercebackend.dto.ProductResponseDto
+import com.example.ecommercebackend.dto.product.ProductResponseDto
 import org.springframework.data.annotation.Id
 import org.springframework.data.annotation.Version
 import org.springframework.data.relational.core.mapping.Table

@@ -1,7 +1,8 @@
 package com.example.ecommercebackend.controller
 
-import com.example.ecommercebackend.dto.ProductResponseDto
-import com.example.ecommercebackend.dto.ProductRegistrationDto
+import com.example.ecommercebackend.dto.product.ProductResponseDto
+import com.example.ecommercebackend.dto.product.ProductRegistrationDto
+import com.example.ecommercebackend.dto.product.ProductUpdateDto
 import com.example.ecommercebackend.service.ProductService
 import io.github.oshai.kotlinlogging.KLogger
 import jakarta.validation.Valid
@@ -38,5 +39,25 @@ class ProductController(
         } ?: ResponseEntity.notFound().build()
     }
 
-    // TODO tambahin add product
+    @PutMapping("/{id}")
+    suspend fun updateProduct(
+        @PathVariable id: String,
+        @Valid @RequestBody updateDto: ProductUpdateDto
+    ): ProductResponseDto {
+        logger.info { "Processing update request for user: $id" }
+        return productService.updateProduct(id, updateDto)
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    suspend fun deleteProduct(@PathVariable id: String) {
+        logger.info { "Processing delete request for user: $id" }
+        productService.deleteProduct(id)
+    }
+
+    @GetMapping("/search")
+    fun searchProducts(@RequestParam name: String): Flow<ProductResponseDto> {
+        logger.info { "Searching users by name: $name" }
+        return productService.searchProductsByName(name)
+    }
 }

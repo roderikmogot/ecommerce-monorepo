@@ -117,6 +117,22 @@ class GlobalExceptionHandler (var logger: KLogger) {
         return ResponseEntity(error, HttpStatus.valueOf(error.status))
     }
 
+    /**
+     * Handle product-related exceptions
+     */
+    @ExceptionHandler(ProductAlreadyExistsException::class)
+    fun handleProductAlreadyExistsException(ex: ProductAlreadyExistsException, request: ServerHttpRequest): ResponseEntity<ErrorResponse> {
+        val error = ErrorResponse(
+            status = HttpStatus.CONFLICT.value(),
+            error = "Product Already Exists",
+            message = ex.message ?: "A product with this name already exists",
+            path = request.uri.toString()
+        )
+
+        logger.warn { "Product already exists: ${ex.message} at ${request.uri}" }
+        return ResponseEntity(error, HttpStatus.CONFLICT)
+    }
+
     @ExceptionHandler(UserNotFoundException::class)
     fun handleUserNotFoundException(ex: UserNotFoundException, request: ServerHttpRequest): ResponseEntity<ErrorResponse> {
         val error = ErrorResponse(
