@@ -19,6 +19,8 @@ services:
       timeout: 5s
       retries: 5
     restart: always
+    networks:
+      - app_net
 
   # Spring Boot Backend Service
   backend:
@@ -38,6 +40,8 @@ services:
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=postgres
     restart: on-failure
+    networks:
+      - app_net
 
   # Prometheus
   prometheus:
@@ -52,7 +56,10 @@ services:
     depends_on:
       - backend
     restart: always
+    networks:
+      - app_net
 
+  # Grafana
   grafana:
     image: grafana/grafana-oss:latest
     container_name: grafana
@@ -63,6 +70,43 @@ services:
     depends_on:
       - prometheus
     restart: always
+    networks:
+      - app_net
+
+  # Locust Master Node
+  locust-master:
+    build:
+      context: .
+      dockerfile: tests/Dockerfile.locust
+    container_name: locust_master
+    ports:
+      - "8089:8089" # Web
+      - "5557:5557" # Port for workers to connect
+      - "5558:5558"
+    volumes:
+      - ./tests:/mnt/locust
+    command: locust --master --host http://backend:8080 -f /mnt/locust/locustfile.py
+    networks:
+      - app_net
+
+  locust-worker:
+    build:
+      context: .
+      dockerfile: tests/Dockerfile.locust
+    volumes:
+      - ./tests:/mnt/locust
+    command: locust --worker --master-host locust-master -f /mnt/locust/locustfile.py
+    depends_on:
+      - locust-master
+      - backend
+    networks:
+      - app_net
+    deploy:
+      replicas: 4
+
+networks:
+  app_net:
+    driver: bridge
 
 volumes:
   postgres_data:
